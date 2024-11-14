@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Product Tests', () => {
-  test('Verify list products with success', async ({ request }) => {
+  test('List all products', async ({ request }) => {
     const response = await request.get('https://automationexercise.com/api/productsList');
 
     console.log(await response.json());
