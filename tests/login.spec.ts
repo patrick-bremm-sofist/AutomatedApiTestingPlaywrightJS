@@ -14,7 +14,6 @@ test.describe('Login API Tests', () => {
     });
 
     console.log(await response.json());
-    // Asserções
     expect(response.status()).toBe(200);
     const responseBody = await response.json();
     expect(responseBody.responseCode).toBe(404);
