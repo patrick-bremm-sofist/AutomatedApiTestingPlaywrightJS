@@ -1,18 +1,26 @@
 import { test, expect } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test.describe('Login API Tests', () => {
+  test('Verify login with invalid user', async ({ request }) => {
+    // Realiza a chamada para a API utilizando o Playwright
+    
+    const formData = new FormData();
+    formData.append('email', 'patrick.bremm@sofist.co');
+    formData.append('password', '12345678');
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+    const response = await request.post('https://automationexercise.com/api/verifyLogin', {
+      multipart: {
+        email: 'patrick.bremm@netlex.com.br',
+        password: '123456789'
+      }
+    });
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+    console.log("PATRICK");
+    console.log(await response.json());
+    // Asserções
+    expect(response.status()).toBe(200);
+    const responseBody = await response.json();
+    expect(responseBody.responseCode).toBe(404);
+    expect(responseBody.message).toBe('User not found!');
+  });
 });
