@@ -2,8 +2,6 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Login API Tests', () => {
   test('Verify login with invalid user', async ({ request }) => {
-    // Realiza a chamada para a API utilizando o Playwright
-    
     const formData = new FormData();
     formData.append('email', 'patrick.bremm@sofist.co');
     formData.append('password', '12345678');
